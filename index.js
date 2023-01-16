@@ -25,8 +25,6 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-app.use('/api/game', gameRouter);
-
 app.get('/get/game', (req, res) =>{
     pool.query('SELECT * from game_connection', (err, result) =>{
         if(err){
