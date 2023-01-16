@@ -49,8 +49,20 @@ app.get('/get/game/code', (req, res) =>{
     });
 });
 
-app.post('/get/game/status', (req, res) =>{
+app.post('/set/game/status', (req, res) =>{
     pool.query('UPDATE game_connection set game_connected = true', (err, result) =>{
+        if(err){
+            res.status(500).json({
+                error:err.message
+            });
+        }else{
+            res.json(result.rows);
+        }
+    });
+});
+
+app.get('/get/game/status', (req, res) =>{
+    pool.query('SELECT game_connected from game_connection', (err, result) =>{
         if(err){
             res.status(500).json({
                 error:err.message
