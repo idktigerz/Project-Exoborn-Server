@@ -17,6 +17,53 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
+app.get('/get', (req, res) => {
+    client.query('SELECT * FROM player, drone, game_connection', (err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message
+            });
+        } else {
+            res.json(result.rows);
+        }
+    });
+});
+
+app.get('/get/players', (req, res) => {
+    client.query('SELECT * FROM player', (err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message
+            });
+        } else {
+            res.json(result.rows);
+        }
+    });
+});
+
+app.get('/get/drone', (req, res) => {
+    client.query('SELECT * FROM player', (err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message
+            });
+        } else {
+            res.json(result.rows);
+        }
+    });
+});
+
+app.get('/get/game', (req, res) => {
+    client.query('SELECT * FROM game_connection', (err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message
+            });
+        } else {
+            res.json(result.rows);
+        }
+    });
+});
 // Define a POST route to handle a user login
 app.post('/login', (req, res) => {
     let username = req.body.username;
