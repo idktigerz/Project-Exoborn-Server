@@ -6,9 +6,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-var droneRouter = require('./routes/droneRoutes');
-var gameRouter = require('./routes/gameRoutes');
-
 const connectionString = process.env.DATABASE_URL
 const Pool = pg.Pool
 const pool = new Pool({
