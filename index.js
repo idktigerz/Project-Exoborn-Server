@@ -37,6 +37,29 @@ app.get('/get/game', (req, res) =>{
     });
 });
 
+app.get('/get/game/code', (req, res) =>{
+    pool.query('SELECT game_code from game_connection', (err, result) =>{
+        if(err){
+            res.status(500).json({
+                error:err.message
+            });
+        }else{
+            res.json(result.rows);
+        }
+    });
+});
+
+app.post('/get/game/status', (req, res) =>{
+    pool.query('UPDATE game_connection set game_connected = true', (err, result) =>{
+        if(err){
+            res.status(500).json({
+                error:err.message
+            });
+        }else{
+            res.json(result.rows);
+        }
+    });
+});
 
 // Start the server on port 3000
 app.listen(3000, () => {
