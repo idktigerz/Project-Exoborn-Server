@@ -1,13 +1,8 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
-require('dotenv').config();
-
-const { Client } = require('pg');
-const client = new Client({
-    connectionString: process.env.DATABASE_URL
-});
 
 // Use body-parser middleware to parse incoming JSON data
 app.use(bodyParser.json());
