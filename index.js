@@ -44,7 +44,7 @@ app.post('/login/:game_code', (req, res) =>{
         if(err){
             res.status(500).send('Error, cannot retrive information from the database');
         }else{
-            res.send(game_code)
+            res.send(game_code);
             pool.query('UPDATE game_connection SET game_connected = true WHERE game_code = $game_code', (err, res) =>{
                 if (err) {
                     console.log(err.stack);
