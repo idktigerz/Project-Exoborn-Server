@@ -37,7 +37,7 @@ app.get('/get/game', (req, res) =>{
     });
 });
 
-app.get('/login/:game_code', (req, res) =>{
+app.post('/login/:game_code', (req, res) =>{
     const game_code = req.params.game_code;
     pool.query('SELECT * from game_connection WHERE game_code = ${game_code};', (err, res) =>{
         if(err){
@@ -50,8 +50,8 @@ app.get('/login/:game_code', (req, res) =>{
                     console.log(res.rows);
                 }
             });
+            res.send(res.rows[0]);
         }
-        res.send(res.rows[0]);
     });
 });
 
