@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 // Define a GET route for the root URL
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
+    res.send('Hello stranger, I see you have wondered too far.');
 });
 
 app.get('/get/game', (req, res) =>{
@@ -37,29 +37,23 @@ app.get('/get/game', (req, res) =>{
     });
 });
 
-app.get('/get/game/code', (req, res) =>{
-    pool.query('SELECT game_code from game_connection', (err, result) =>{
-        if(err){
-            res.status(500).json({
-                error:err.message
-            });
-        }else{
-            res.json(result.rows);
-        }
-    });
+app.post('/login/:game_code', (req, res) =>{
+    const game_code = req.params.game_code;
+    pool.query('SELECT * from game_connection where game_code = ${game_code};');
+    if(err){
+        res.status(500).send('Error, cannot retrive information from the database');
+    }else{
+        pool.query('UPDATE game_connection SET game_connected = true', (err, res) =>{
+            if (err) {
+                console.log(err.stack);
+            } else {
+                console.log(res.rows);
+            }
+        });
+        res.send(res.rows[0]);
+    }
 });
 
-app.post('/set/game/status', (req, res) =>{
-    pool.query('UPDATE game_connection set game_connected = true', (err, result) =>{
-        if(err){
-            res.status(500).json({
-                error:err.message
-            });
-        }else{
-            res.json(result.rows);
-        }
-    });
-});
 
 app.get('/get/game/status', (req, res) =>{
     pool.query('SELECT game_connected from game_connection', (err, result) =>{
@@ -72,6 +66,18 @@ app.get('/get/game/status', (req, res) =>{
         }
     });
 });
+
+app.get('/get/player', (req, res) =>{
+    pool.query('SELECT * from player', (err, result) =>{
+        if(err){
+            res.status(500).json({
+                error:err.message
+            });
+        }else{
+            res.json(result.rows);
+        }
+    })
+})
 
 // Start the server on port 3000
 app.listen(3000, () => {
