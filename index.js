@@ -38,7 +38,7 @@ app.get('/get/game', (req, res) =>{
 });
 
 app.put('/login/:game_code', (req, res) =>{
-    const game_code = req.params.game_code;
+    let game_code = req.params.game_code;
     pool.query('SELECT * from game_connection WHERE game_code = ${game_code};', (err, res) =>{
         if(err){
             res.status(500).send('Error, cannot retrive information from the database');
