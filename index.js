@@ -46,7 +46,6 @@ app.put('/login/:game_code', (req, res) =>{
         }else if(res.rows == 0){
             res.status(430).send('Error, no game with that code')
         }else{
-            res.send(game_code);
             pool.query('UPDATE game_connection SET game_connected = true', (err, res) =>{
                 if (err) {
                     console.log(err.stack);
@@ -54,7 +53,6 @@ app.put('/login/:game_code', (req, res) =>{
                     console.log(res.rows);
                 }
             });
-            res.send(res.rows[0]);
         }
     });
 });
