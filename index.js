@@ -50,8 +50,8 @@ app.get('/login/:game_code', (req, res) =>{
                     console.log(res.rows);
                 }
             });
-            res.send(res.rows[0]);
         }
+        res.send(res.rows[0]);
     });
 });
 
