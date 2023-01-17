@@ -39,11 +39,11 @@ app.get('/get/game', (req, res) =>{
 
 app.post('/login/:game_code', (req, res) =>{
     let game_code = req.params.game_code;
-    pool.query('SELECT * from game_connection WHERE game_code = ${game_code};', (err, res) =>{
+    pool.query('SELECT * from game_connection WHERE game_code = $1;', (err, res) =>{
         if(err){
             res.status(500).send('Error, cannot retrive information from the database');
         }else{
-            pool.query('UPDATE game_connection SET game_connected = true WHERE game_code = ${game_code}', (err, res) =>{
+            pool.query('UPDATE game_connection SET game_connected = true WHERE game_code = $1', (err, res) =>{
                 if (err) {
                     console.log(err.stack);
                 } else {
