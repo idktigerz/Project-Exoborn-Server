@@ -116,12 +116,12 @@ app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
     console.log("Upgrade Num: " + upgradeNum);
     console.log("Upgrade Num ID: " + upgradeNumID);
     pool.query(`UPDATE drone SET ${upgradeNum} = ${upgradeNumID} WHERE drone_id = ${id}`, (err, res) =>{
-        if(err){
-            res.status(500).json({
-                error:err.message
-            });
+        if (err) {
+            res.status(500).send('Error updating data in database');
+        } else {
+            res.send(result.rows[0]);
+            res.send({ message: 'app_pic_number updated' });
         }
-        //res.send(res.rows[0]);
     });
 });
 // Start the server on port 3000
