@@ -120,10 +120,9 @@ app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
             res.status(500).json({
                 error:err.message
             });
-        }else{
-            res.send(res.rows[0]);
-        } 
+        }
     });
+    res.send(res.rows[0]);
 });
 // Start the server on port 3000
 app.listen(3000, () => {
