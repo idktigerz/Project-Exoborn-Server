@@ -39,14 +39,13 @@ app.get('/get/game', (req, res) =>{
 
 app.put('/login/:game_code', (req, res) =>{
     let game_code = req.params.game_code;
-    res.send(game_code);
-    pool.query('SELECT * from game_connection WHERE game_code = $1;', (err, res) =>{
+    pool.query(`SELECT * from game_connection WHERE game_code = ${game_code};`, (err, result) =>{
         if(err){
-            res.status(500).send('Error, cannot retrive information from the database');
+            result.status(500).send('Error, cannot retrive information from the database');
         }else if(res.rows == 0){
-            res.status(430).send('Error, no game with that code')
+            result.status(430).send('Error, no game with that code')
         }else{
-            pool.query('UPDATE game_connection SET game_connected = true', (err, res) =>{
+            pool.query(`UPDATE game_connection SET game_connected = true WHERE game_code = ${game_code};`, (err, res) =>{
                 if (err) {
                     console.log(err.stack);
                 } else {
@@ -94,6 +93,35 @@ app.get('/get/drone', (req, res) =>{
         }
     })
 })
+
+app.get('/get/drone/:id', (req, res) =>{
+    let id = req.params.id;
+    pool.query('SELECT * from drone WHERE drone_id = $1', (err, result) => {
+        if(err){
+            res.status(500).json({
+                error:err.message
+            });
+        }else{
+            res.json(result.rows);
+        }
+    })
+})
+
+app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
+    const id = req.params.id;
+    const upgradeNum = req.params.upgradeNum;
+    const upgradeNumID = req.body.upgradeNumID;
+    console.log("ID: " + id);
+    console.log("Upgrade Num: " + upgradeNum);
+    console.log("Upgrade Num ID: " + upgradeNumID);
+    pool.query(`UPDATE drone SET ${upgradeNum} = ${upgradeNumID} WHERE drone_id = ${id}`, (err, result) =>{
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
 // Start the server on port 3000
 app.listen(3000, () => {
     console.log('Server started on port 3000');
