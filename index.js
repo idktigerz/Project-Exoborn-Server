@@ -158,7 +158,7 @@ app.put('/set/drone/resources/:value', (req, res) => {
     });
 });
 
-app.put('/set/drone/resources/:id/dif', (req, res) => {
+app.put('/set/drone/resources/dif/:id', (req, res) => {
     const id = req.params.id;
     pool.query(`UPDATE drone SET drone_resources_amount = 0 WHERE drone_id = ${id}`, (err, result) => {
         if (err) {
