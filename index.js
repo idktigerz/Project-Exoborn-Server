@@ -121,7 +121,7 @@ app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
                 error:err.message
             });
         }
-        res.send(res.rows[0]);
+        //res.send(res.rows[0]);
     });
 });
 // Start the server on port 3000
