@@ -45,7 +45,7 @@ app.put('/login/:game_code', (req, res) =>{
         }else if(res.rows == 0){
             result.status(430).send('Error, no game with that code')
         }else{
-            pool.query(`UPDATE game_connection SET game_connected = true WHERE game_code = ${game_code};`, (err, res) =>{
+            pool.query(`UPDATE game_connection SET game_connected = true`, (err, res) =>{
                 if (err) {
                     console.log(err.stack);
                 } else {
