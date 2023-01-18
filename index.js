@@ -124,8 +124,6 @@ app.put('/set/drone/:id/:upgradeNum/:upgradeNumID', (req, res) => {
         }
     });
 });
-<<<<<<< HEAD
-=======
 
 app.put('/set/drone/undock', (req, res) => {
     const id = req.params.id;
@@ -160,7 +158,6 @@ app.put('/set/drone/resources/:value', (req, res) => {
     });
 });
 
->>>>>>> 56a720465ef7b269ef41be0d0ce7f641a297ae06
 app.put('/set/drone/resources/:id', (req, res) => {
     const id = req.params.id;
     pool.query(`UPDATE drone SET drone_resources_amount = 0 WHERE drone_id = ${id}`, (err, result) => {
