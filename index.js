@@ -130,7 +130,7 @@ app.put('/set/drone/resourses/:id', (req, res) => {
     });
 });
 app.post('/set/ids', (req, res) => {
-    pool.query(`insert into player default values`, (err, result) => {
+    pool.query(`insert into player default values SELECT SCOPE_IDENTITY()`, (err, result) => {
         if (err) {
             res.status(500).send(err);
         } else {
