@@ -146,7 +146,7 @@ app.post('/set/ids', (req, res) => {
         }
     });
 });
-app.ger('/max/id', (req, res) => {
+app.get('/max/id', (req, res) => {
     pool.query(`select MAX(player_id) from player`, (err, result) => {
         if (err) {
             res.status(500).send(err);
