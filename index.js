@@ -137,13 +137,6 @@ app.post('set/ids', (req, res) => {
             res.send(result.rows);
         }
     });
-    pool.query(`insert into drone (drone_docked,drone_resources_amount,drone_upgrade_1,drone_upgrade_2,drone_upgrade_3) values(true,0,1,1,1)`, (err, result) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.send(result.rows);
-        }
-    });
 });
 // Start the server on port 3000
 app.listen(3000, () => {
