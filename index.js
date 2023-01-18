@@ -43,9 +43,8 @@ app.put('/login/:game_code', (req, res) => {
     pool.query(`SELECT * from game_connection WHERE game_code = ${game_code};`, (err, result) => {
         if (err) {
             result.status(500).send('Error, cannot retrive information from the database');
-        }else{
-            res.json(result.rows);
-        }  
+        }
+        res.json(result.rows);
     });
 });
 
