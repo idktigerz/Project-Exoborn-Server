@@ -37,8 +37,8 @@ app.get('/get/game', (req, res) => {
     });
 });
 
-app.put('/login', (req, res) => {
-    let game_code = req.body.game_code;
+app.put('/login/:game_code', (req, res) => {
+    let game_code = req.params.game_code;
     console.log(game_code);
     pool.query(`SELECT * from game_connection WHERE game_code = ${game_code};`, (err, result) => {
         if (err) {
