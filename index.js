@@ -39,14 +39,9 @@ app.get('/get/game', (req, res) => {
 
 app.put('/login/:game_code', (req, res) => {
     let game_code = req.params.game_code;
-<<<<<<< HEAD
     console.log(game_code);
-    pool.query(`SELECT * from game_connection WHERE game_code = ${game_code};`, (err, result) =>{
-        if(err){
-=======
     pool.query(`SELECT * from game_connection WHERE game_code = ${game_code};`, (err, result) => {
         if (err) {
->>>>>>> 2ad678548094b65f09818d15897b283011a22809
             result.status(500).send('Error, cannot retrive information from the database');
         } else if (res.rows == 0) {
             result.status(430).send('Error, no game with that code')
