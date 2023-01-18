@@ -109,9 +109,9 @@ app.get('/get/drone/:id', (req, res) =>{
 })
 
 app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
-    const id = req.params.id;
-    const upgradeNum = req.params.upgradeNum;
-    const upgradeNumID = req.body.upgradeNumID;
+    let id = req.params.id;
+    let upgradeNum = req.params.upgradeNum;
+    let upgradeNumID = req.body.upgradeNumID;
     console.log("ID: " + id);
     console.log("Upgrade Num: " + upgradeNum);
     console.log("Upgrade Num ID: " + upgradeNumID);
