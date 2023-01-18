@@ -121,7 +121,7 @@ app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
                 error:err.message
             });
         }else{
-            res.json(result.rows);
+            res.json(result.rows[0]);
         } 
     });
 });
