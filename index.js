@@ -155,6 +155,17 @@ app.get('/max/id', (req, res) => {
         }
     });
 });
+app.get('get/drone/stats', (req, res) => {
+    pool.query(`select * from drone_stat `, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows[0]);
+        }
+    });
+});
+
+
 
 // Start the server on port 3000
 app.listen(3000, () => {
