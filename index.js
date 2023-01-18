@@ -97,7 +97,6 @@ app.get('/get/drone', (req, res) =>{
 
 app.get('/get/drone/:id', (req, res) =>{
     let id = req.params.id;
-    res.send(id);
     pool.query('SELECT * from drone WHERE drone_id = $1', (err, result) => {
         if(err){
             res.status(500).json({
