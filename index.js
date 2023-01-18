@@ -44,9 +44,6 @@ app.put('/login/:game_code', (req, res) => {
         if (err) {
             result.status(500).send('Error, cannot retrive information from the database');
         }else{
-            if(result.rowCount == 0){
-                result.status(404).send('Error, no game with that code');
-            }
             res.json(result.rows);
         }  
     });
