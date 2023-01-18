@@ -112,6 +112,7 @@ app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
     let id = req.params.id;
     let upgradeNum = req.params.upgradeNum;
     let upgradeNumID = req.body.upgradeNumID;
+    console.log(id);
     pool.query('UPDATE drone SET ${upgradeNum} = ${upgradeNumID} WHERE drone_id = ${id}', (err, res) =>{
         if(err){
             res.status(500).json({
