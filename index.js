@@ -94,6 +94,21 @@ app.get('/get/drone', (req, res) =>{
         }
     })
 })
+
+app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
+    let id = req.params.id;
+    let upgradeNum = req.params.upgradeNum;
+    let upgradeNumID = req.body.upgradeNumID;
+    pool.query('UPDATE drone SET ${upgradeNum} = ${upgradeNumID} WHERE drone_id = ${id}', (err, res) =>{
+        if(err){
+            res.status(500).json({
+                error:err.message
+            });
+        }else{
+            res.json(result.rows);
+        } 
+    });
+});
 // Start the server on port 3000
 app.listen(3000, () => {
     console.log('Server started on port 3000');
