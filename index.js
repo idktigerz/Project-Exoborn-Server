@@ -37,19 +37,16 @@ app.get('/get/game', (req, res) => {
     });
 });
 
-app.put('/login/:game_code', (req, res) => {
-    let game_code = req.params.game_code;
+app.put('/login', (req, res) => {
+    let game_code = req.body.game_code;
     console.log(game_code);
     pool.query(`SELECT * from game_connection WHERE game_code = ${game_code};`, (err, result) => {
         if (err) {
             result.status(500).send('Error, cannot retrive information from the database');
         }else{
-            pool.query(`UPDATE game_connection SET game_connected = true`, (err, res) => {
-                if (err) {
-                    console.log(err.stack);
-                }
-            });
+            res.json(result.rows);
         }
+       
     });
 });
 
@@ -93,7 +90,7 @@ app.get('/get/drone', (req, res) => {
 
 app.get('/get/drone/:id', (req, res) => {
     let id = req.params.id;
-    pool.query('SELECT * from drone WHERE drone_id = $1', (err, result) => {
+    pool.query('SELECT * from drone WHERE drone_id = ', (err, result) => {
         if (err) {
             res.status(500).json({
                 error: err.message
