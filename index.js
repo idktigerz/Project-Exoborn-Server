@@ -37,6 +37,19 @@ app.get('/get/game', (req, res) => {
     });
 });
 
+app.get('/get/game/:code/droneID', (req, res) => {
+    let game_code = req.params.code;
+    pool.query(`SELECT game_drone_id from game_connection WHERE game_code = ${game_code}`, (err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message
+            });
+        } else {
+            res.json(result.rows);
+        }
+    });
+});
+
 app.put('/login/:game_code', (req, res) => {
     let game_code = req.params.game_code;
     console.log(game_code);
