@@ -152,6 +152,7 @@ app.put('/set/drone/resourses/:id', (req, res) => {
             res.status(500).send(err);
         } else {
             res.send(result.rows);
+
         }
     });
 });
