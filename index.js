@@ -151,7 +151,7 @@ app.get('/max/id', (req, res) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.send(result.rows);
+            res.send(result.rows[0]);
         }
     });
 });
