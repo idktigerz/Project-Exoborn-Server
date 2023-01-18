@@ -155,8 +155,8 @@ app.get('/max/id', (req, res) => {
         }
     });
 });
-app.get('/get/drone/stats', (req, res) => {
-    pool.query('select * from drone_stat where stat_upgrade=2', (err, result) => {
+app.get('/get/stats', (req, res) => {
+    pool.query('select * from drone_stat', (err, result) => {
         if (err) {
             res.status(500).json({
                 error: err.message
