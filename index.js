@@ -111,6 +111,40 @@ app.put('/set/drone/:id/:upgradeNum/:upgradeNumID', (req, res) => {
         }
     });
 });
+
+app.put('/set/drone/undock', (req, res) => {
+    const id = req.params.id;
+    pool.query(`UPDATE drone SET drone_docked = false`, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
+app.put('/set/drone/dock', (req, res) => {
+    const id = req.params.id;
+    pool.query(`UPDATE drone SET drone_docked = true`, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
+app.put('/set/drone/resources/:value', (req, res) => {
+    const value = req.params.value;
+    pool.query(`UPDATE drone SET drone_resources_amount = ${value}`, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
 app.put('/set/drone/resourses/:id', (req, res) => {
     const id = req.params.id;
     pool.query(`UPDATE drone SET drone_resources_amount = 0 WHERE drone_id = ${id}`, (err, result) => {
