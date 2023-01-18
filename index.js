@@ -37,15 +37,27 @@ app.get('/get/game', (req, res) => {
     });
 });
 
+app.get('/get/game/:code/droneID', (req, res) => {
+    let game_code = req.params.code;
+    pool.query(`SELECT game_drone_id from game_connection WHERE game_code = ${game_code}`, (err, result) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message
+            });
+        } else {
+            res.json(result.rows);
+        }
+    });
+});
+
 app.put('/login/:game_code', (req, res) => {
     let game_code = req.params.game_code;
     console.log(game_code);
     pool.query(`SELECT * from game_connection WHERE game_code = ${game_code};`, (err, result) => {
         if (err) {
             result.status(500).send('Error, cannot retrive information from the database');
-        }else{
-            res.json(result.rows);
-        }  
+        }
+        res.json(result.rows);
     });
 });
 
@@ -112,6 +124,43 @@ app.put('/set/drone/:id/:upgradeNum/:upgradeNumID', (req, res) => {
         }
     });
 });
+<<<<<<< HEAD
+=======
+
+app.put('/set/drone/undock', (req, res) => {
+    const id = req.params.id;
+    pool.query(`UPDATE drone SET drone_docked = false`, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
+app.put('/set/drone/dock', (req, res) => {
+    const id = req.params.id;
+    pool.query(`UPDATE drone SET drone_docked = true`, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
+app.put('/set/drone/resources/:value', (req, res) => {
+    const value = req.params.value;
+    pool.query(`UPDATE drone SET drone_resources_amount = ${value}`, (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(result.rows);
+        }
+    });
+});
+
+>>>>>>> 56a720465ef7b269ef41be0d0ce7f641a297ae06
 app.put('/set/drone/resources/:id', (req, res) => {
     const id = req.params.id;
     pool.query(`UPDATE drone SET drone_resources_amount = 0 WHERE drone_id = ${id}`, (err, result) => {
