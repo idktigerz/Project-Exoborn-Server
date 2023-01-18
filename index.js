@@ -119,7 +119,7 @@ app.put('/set/drone/:id/:upgradeNum', (req, res) =>{
         if (err) {
             res.status(500).send('Error updating data in database');
         } else {
-            res.send(result.rows[0]);
+            res.send(result.rows);
         }
     });
 });
