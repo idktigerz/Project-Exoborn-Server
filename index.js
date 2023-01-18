@@ -160,7 +160,7 @@ app.get('get/drone/stats', (req, res) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.send(result.rows[0]);
+            res.send(result.rows);
         }
     });
 });
