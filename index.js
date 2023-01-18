@@ -156,7 +156,7 @@ app.get('/max/id', (req, res) => {
     });
 });
 app.get('/get/stats', (req, res) => {
-    pool.query('select * from drone_stat', (err, result) => {
+    pool.query('select * from drone_stat order by stat_id asc', (err, result) => {
         if (err) {
             res.status(500).json({
                 error: err.message
